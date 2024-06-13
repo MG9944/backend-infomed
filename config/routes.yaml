@@ -1,0 +1,194 @@
+app:
+    path: /
+app_logout:
+  path: /logout
+  methods: GET
+
+api_login_check:
+  path: /api/login_check
+  methods: [POST]
+
+api_register_doctor:
+  path: /api/register/doctor
+  methods: POST
+  controller: App\Controller\UserController:registerDoctor
+
+api_create_doctor:
+  path: /api/doctor/create
+  methods: POST
+  controller: App\Controller\UserController:createNewDoctor
+
+api_change_password:
+  path: /api/change/password
+  methods: POST
+  controller: App\Controller\SecurityController:changePassword
+
+api_admin_doctor_change_status:
+  path: api/admin/users/{userId}/change-status
+  methods: POST
+  controller: App\Controller\UserController:changeStatus
+  requirements:
+    userId: '\d+'
+
+api_edit_doctor:
+  path: /api/doctor/{userId}/edit
+  methods: POST
+  controller: App\Controller\UserController:editUser
+  requirements:
+    userId: '\d+'
+
+api_edit_personal_data:
+  path: /api/doctor/edit-personal-data
+  methods: POST
+  controller: App\Controller\UserController:editPersonalData
+
+api_doctor_appointments:
+  path: /api/doctor/appointments
+  methods: GET
+  controller: App\Controller\UserController:getDoctorAppointments
+
+api_doctors:
+  path: /api/doctors
+  methods: GET
+  controller: App\Controller\UserController:getDoctorsByMedicalCenter
+
+api_medicalCenter:
+  path: /api/medical/center
+  methods: GET
+  controller: App\Controller\UserController:getMedicalCenter
+
+api_specialisation:
+  path: /api/specialisation
+  methods: GET
+  controller: App\Controller\UserController:getSpecialisation
+
+api_user_info:
+  path: /api/user/info
+  methods: GET
+  controller: App\Controller\UserController:getUserInfo
+
+api_medicamente:
+  path: /api/medicamente
+  methods: GET
+  controller: App\Controller\MedicamenteController:getMedicamente
+
+api_admin_create_medicamente:
+  path: /api/admin/create/medicamente
+  methods: POST
+  controller: App\Controller\MedicamenteController:createMedicamente
+
+api_admin_edit_medicamente:
+  path: /api/admin/medicamente/{id}/edit
+  methods: PUT
+  controller: App\Controller\MedicamenteController:editMedicamente
+  requirements:
+    id: '\d+'
+
+api_ilness:
+  path: /api/illness
+  methods: GET
+  controller: App\Controller\IllnessController:getIllness
+
+api_admin_create_illness:
+  path: /api/admin/create/illness
+  methods: POST
+  controller: App\Controller\IllnessController:createIllness
+
+api_admin_edit_illness:
+  path: /api/admin/illness/{id}/edit
+  methods: POST
+  controller: App\Controller\IllnessController:editIllness
+  requirements:
+    id: '\d+'
+
+api_appointments:
+  path: /api/appointments
+  methods: GET
+  controller: App\Controller\AppointmentController:getAppointment
+
+api_create_appointment:
+  path: /api/create/appointment
+  methods: POST
+  controller: App\Controller\AppointmentController:createAppointment
+
+api_edit_appointment:
+  path: /api/appointment/{id}/edit
+  methods: POST
+  controller: App\Controller\AppointmentController:editAppointment
+  requirements:
+    id: '\d+'
+
+api_cancel_appointment:
+  path: /api/appointment/{id}/cancel
+  methods: POST
+  controller: App\Controller\AppointmentController:cancelPatientAppointment
+  requirements:
+    id: '\d+'
+
+api_continue_insert_data_appointment:
+  path: /api/appointment/{id}/continue
+  methods: PUT
+  controller: App\Controller\AppointmentController:continueInsertAppointmentData
+  requirements:
+    id: '\d+'
+
+api_get_patients:
+  path: /api/patients
+  methods: GET
+  controller: App\Controller\PatientController:getPatientsByMedicalCenter
+
+api_create_patient:
+  path: /api/create/patient
+  methods: POST
+  controller: App\Controller\PatientController:createPatient
+
+api_edit_patient:
+  path: /api/patient/{id}/edit
+  methods: PUT
+  controller: App\Controller\PatientController:editPatient
+  requirements:
+    id: '\d+'
+
+api_get_patients_patient_card:
+  path: /api/patients/patient-card
+  methods: GET
+  controller: App\Controller\PatientController:getPatientsInPatientCard
+
+api_get_patient_appointments_patient_card:
+  path: /api/patients/patient-card/{id}/appointments
+  methods: GET
+  controller: App\Controller\PatientController:getPatientAppoinmentsInPatientCard
+  requirements:
+    id: '\d+'
+
+api_check_email_exist:
+    path: /api/check/email
+    methods: POST
+    controller: App\Controller\SecurityController:forgotPasswordCheckExistEmail
+
+api_generate_verification_code:
+    path: /api/check/code
+    methods: POST
+    controller: App\Controller\SecurityController:checkVerificationCode
+
+api_set_new_password:
+    path: /api/new/password
+    methods: POST
+    controller: App\Controller\SecurityController:setNewPassword
+
+api_generate_patient_prescription:
+  path: /api/appointment/generate/{id}/prescription
+  methods: POST
+  controller: App\Controller\PatientController:generatePrescription
+  requirements:
+    id: '\d+'
+
+api_generate_patient_card:
+  path: /api/patients/patient-card/{idPatient}/generate
+  methods: POST
+  controller: App\Controller\PatientController:generatePatientCard
+  requirements:
+    idPatient: '\d+'
+
+ekreative_health_check:
+  resource: '@EkreativeHealthCheckBundle/Resources/config/routes.xml'

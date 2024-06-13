@@ -1,0 +1,12 @@
+<h3>Infomed, Informacja o wygenerowaniu recepty dla pacjenta!</h3>
+
+<p>
+<div>Szczegóły wizyty:</div>
+<div>Pacjent: {{ appointment.getIdPatient.getFullname }}</div>
+<div>Data: {{  appointment.getAppointmentDate | date('Y-m-d H:i') }}</div>
+</p>
+
+<p>
+    Pozdrawiamy<br/>
+    Infomed
+</p>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head> <meta charset="UTF-8"></head>
+<body style="padding: 3rem">
+<h2 style="margin-top: 3rem">Doctor</h2>
+<h4> {{ appointment.getUser.getFullName }}</h4>
+<h4> {{ appointment.getUser.getSpecialisation.getName }}</h4>
+<h4> {{ appointment.getUser.getMedicalCenter.getName }} </h4>
+<h4> {{ appointment.getUser.getMedicalCenter.getAddress }} </h4><br />
+
+<div style="margin-right: 3rem">
+<h2 style="margin-right: 3rem">Patient</h2>
+<h4>Patient fullname: {{ appointment.getIdPatient.getFullname }} </h4>
+<h4>Patient pesel: {{ appointment.getIdPatient.getPesel }} </h4>
+<h4>Patient address: {{ appointment.getIdPatient.getAddress }} </h4>
+</div>
+<div style="margin-top: 3rem">
+    Appointment date: {{ appointment.getAppointmentDate | date('Y-m-d H:i')}}<br />
+</div>
+
+<div style="margin-top: 3rem">
+    Medicamente: {{ appointment.getMedicamenteDescription}}<br />
+</div>
+
+
+</body>
+</html>

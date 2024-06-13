@@ -1,0 +1,20 @@
+Przypomnienie o wizycie
+
+Masz umówioną wizytę
+
+{% for appointment in appointments %}
+
+Dnia {{ appointment.getAppointmentDate | date('Y-m-d H:i')}}
+
+U doktor {{ appointment.getUser.getFullName }}
+
+    w przychodni {{ appointment.getUser.getMedicalCenter.getFullName
+appointment.getUser.getMedicalCenter.getFullAddress }}
+
+{% endfor %}
+
+Prosimy o przybycie 15 minut wcześniej
+
+
+Pozdrawiamy
+Infomed

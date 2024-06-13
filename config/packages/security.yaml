@@ -1,0 +1,68 @@
+security:
+  enable_authenticator_manager: true
+  encoders:
+    App\Entity\User:
+      algorithm: argon2i
+
+  # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+  providers:
+    # used to reload user from session & other features (e.g. switch_user)
+    app_user_provider:
+      entity:
+        class: App\Entity\User
+        property: email
+  firewalls:
+    dev:
+      pattern: ^/(_(profiler|wdt)|css|images|js)/
+      security: false
+    login:
+      pattern: ^/api/login
+      stateless: true
+      json_login: # or form_login
+        check_path: /api/login_check  #same as the configured route
+        success_handler: lexik_jwt_authentication.handler.authentication_success
+        failure_handler: lexik_jwt_authentication.handler.authentication_failure
+        #require_previous_session: false
+    api:
+      access_denied_handler: App\Security\AccessDeniedHandler
+      pattern: ^/api              # protected path
+      stateless: true
+      jwt: ~
+      user_checker: App\Security\UserChecker
+    main:
+      pattern: ^/
+      access_denied_handler: App\Security\AccessDeniedHandler
+      logout:
+        path: app_logout
+    healthcheck:
+      pattern: ^/healthcheck
+      security: false
+
+        # activate different ways to authenticate
+
+        # http_basic: true
+        # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
+
+      # form_login: true
+      # https://symfony.com/doc/current/security/form_login_setup.html
+
+  # Easy way to control access for large sections of your site
+  # Note: Only the *first* access control that matches will be used
+
+  role_hierarchy:
+    ROLE_ADMIN: ROLE_DOCTOR
+
+
+  access_control:
+    - { path: ^/api/login, roles: PUBLIC_ACCESS }
+    - { path: ^/api/register/doctor, roles: PUBLIC_ACCESS }
+    - { path: ^/api/check/email, roles: PUBLIC_ACCESS }
+    - { path: ^/api/check/code, roles: PUBLIC_ACCESS }
+    - { path: ^/api/new/password, roles: PUBLIC_ACCESS }
+    - { path: ^/api/medical/center, roles: PUBLIC_ACCESS }
+    - { path: ^/api/specialisation, roles: PUBLIC_ACCESS }
+    - { path: ^/api,       roles: IS_AUTHENTICATED_FULLY }
+    - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+    - { path: ^/healthcheck, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+    - { path: ^/api/admin, roles: ROLE_ADMIN }
+    - { path: ^/, roles: ROLE_USER }
